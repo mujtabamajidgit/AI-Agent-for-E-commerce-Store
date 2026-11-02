@@ -1,0 +1,357 @@
+{
+  "name": "AI Agent for E-commerce Store",
+  "nodes": [
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.chatTrigger",
+      "typeVersion": 1.5,
+      "position": [
+        -320,
+        -48
+      ],
+      "id": "736a6bbc-3c0c-42c7-8db4-f31e0f067136",
+      "name": "When chat message received",
+      "webhookId": "4bb715be-baf7-4b90-9020-4cdb8a97ed11"
+    },
+    {
+      "parameters": {
+        "options": {
+          "systemMessage": "You are a helpful assistant"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        96,
+        -48
+      ],
+      "id": "dae4dba8-7fe9-484a-8427-885b78c9d031",
+      "name": "AI Agent"
+    },
+    {
+      "parameters": {
+        "model": "qwen/qwen3.8-27b",
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatGroq",
+      "typeVersion": 1,
+      "position": [
+        -88,
+        184
+      ],
+      "id": "1fc3c491-97c8-4d30-894b-b8f8d118d824",
+      "name": "Groq Chat Model",
+      "credentials": {
+        "groqApi": {
+          "id": "9RUAGb7akaenYZ2X",
+          "name": "Groq account"
+        }
+      }
+    },
+    {
+      "parameters": {},
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.4,
+      "position": [
+        40,
+        184
+      ],
+      "id": "8b0c06de-a181-49f7-8477-4fe65a87f4ff",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE",
+          "mode": "list",
+          "cachedResultName": "Daraz Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "gid=0",
+          "mode": "list",
+          "cachedResultName": "Customer",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE/edit#gid=0"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "Id",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', `this corresponds to the ID of the customer`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        168,
+        184
+      ],
+      "id": "1e43430c-716b-4f5e-816b-de56f9d64223",
+      "name": "Get Customer",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ioe1HYmbiEFPCdOI",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE",
+          "mode": "list",
+          "cachedResultName": "Daraz Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 457647646,
+          "mode": "list",
+          "cachedResultName": "Customer Order",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE/edit#gid=457647646"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "CustomerId",
+              "lookupValue": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('values0_Value', `This corresponds to the customer ID of the order\n`, 'string') }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        296,
+        184
+      ],
+      "id": "2d4d26cd-e12b-444a-aaaa-7e1a71e6cdf4",
+      "name": "Get Order",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ioe1HYmbiEFPCdOI",
+          "name": "Google Sheets account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE",
+          "mode": "list",
+          "cachedResultName": "Daraz Database",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE/edit?usp=drivesdk"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 457647646,
+          "mode": "list",
+          "cachedResultName": "Customer Order",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1FRBFlu_m1XzkUijALsjzRa0TLHR1zn2MTsOkB8KPwXE/edit#gid=457647646"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Status', ``, 'string') }}",
+            "Id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Id__using_to_match_', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "Id"
+          ],
+          "schema": [
+            {
+              "id": "Id",
+              "displayName": "Id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "CustomerId",
+              "displayName": "CustomerId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Product Name",
+              "displayName": "Product Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Price",
+              "displayName": "Price",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Order Date",
+              "displayName": "Order Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Delivered Date",
+              "displayName": "Delivered Date",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "row_number",
+              "displayName": "row_number",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheetsTool",
+      "typeVersion": 4.7,
+      "position": [
+        424,
+        184
+      ],
+      "id": "55e9785e-8fc1-4296-a91e-bbb61d0d5130",
+      "name": "Update Order",
+      "credentials": {
+        "googleSheetsOAuth2Api": {
+          "id": "Ioe1HYmbiEFPCdOI",
+          "name": "Google Sheets account"
+        }
+      }
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When chat message received": {
+      "main": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Groq Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Customer": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Order": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Update Order": {
+      "ai_tool": [
+        [
+          {
+            "node": "AI Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "4e95268e-63ed-41c3-ae82-5f7717a4b72e",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "549e7004326de72a58d0d989ddecedf9fc9d3464c17ea80dda60f9bdff8dc26f"
+  },
+  "nodeGroups": [],
+  "id": "VJnPF8YX7r1pEaXU",
+  "tags": []
+}
