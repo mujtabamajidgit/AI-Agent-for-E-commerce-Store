@@ -198,15 +198,3 @@ I build AI-powered automation solutions that help businesses streamline operatio
 ⭐ If you find this project useful, consider giving the repository a star!
 
 **Built with n8n, AI Agents, Groq, and Google Sheets.**
-
-
-
-
-<img width="1212" height="599" alt="WOKFLOW" src="https://github.com/user-attachments/assets/54ae090c-e286-4b46-bc92-b54ef95e11ca" />
-
-
-
-<img width="1206" height="591" alt="Cancellation" src="https://github.com/user-attachments/assets/d82e3fa1-8fb4-4a87-9735-375e690437c4" />
-
-
-<img width="917" height="449" alt="customer" src="https://github.com/user-attachments/assets/512b6bfb-20d9-451d-93ae-b9454fa54b7e" />
